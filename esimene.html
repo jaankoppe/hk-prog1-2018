@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Esimene</title>
+</head>
+
+<body>
+    <h1 id="pealkiri"></h1>
+    <input type="text" id="tekst">
+    <button id="nupp">Vajuta siia</button>
+    <input type="submit" id="submitNupp" value="Vajuta Siia">
+    <script>
+        console.log("tere");
+        var tekstiKast = document.getElementById("tekst");
+        var nupp = document.getElementById("nupp");
+
+        nupp.addEventListener("click", function (e) {
+            console.log(e);
+            alert(tekstiKast.value);
+        });
+
+        var fn = function (tekst) {
+            var muutujaFniSees = "fni sees";
+            console.log(muutujaFniSees);
+        }
+
+        {
+            var arv1 = 5;
+            const konstant = 1;
+            let arv2 = 2;
+        }
+        // üherealine kommentaar
+
+        /*
+            Kommentaari plokk
+        */
+
+        // Massiivi (loendi) defineerimine
+        var massiiv1 = new Array();
+        var massiiv2 = [1, "tekst", [], false];
+
+        // Tsükkel
+        for(var i = 0; i < massiiv2.length; i++) {
+            console.log(massiiv2[i]);
+        }
+
+        // HTML Elemendi sisu muutmine
+        document.getElementById("pealkiri").innerHTML = document.title;
+
+    </script>
+</body>
+
+</html>
