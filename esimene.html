@@ -13,6 +13,9 @@
     <input type="text" id="tekst">
     <button id="nupp">Vajuta siia</button>
     <input type="submit" id="submitNupp" value="Vajuta Siia">
+
+    <div id="kast"></div>
+
     <script>
         console.log("tere");
         var tekstiKast = document.getElementById("tekst");
@@ -51,6 +54,15 @@
         // HTML Elemendi sisu muutmine
         document.getElementById("pealkiri").innerHTML = document.title;
 
+        // HTML Elemendi loomine
+        var link = document.createElement("a");
+        link.innerHTML = "See on link";
+        link.href = "#";
+
+        document.body.appendChild(link);
+
+        kast.appendChild(link.cloneNode(true));
+        
     </script>
 </body>
 
