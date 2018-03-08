@@ -15,7 +15,10 @@
 
         var hx, hy;
         var hiirAll = false;
-        window.addEventListener("mousedown", function() {
+        window.addEventListener("mousedown", function(e) {
+            hx = e.clientX - canvasPosition.x;
+            hy = e.clientY - canvasPosition.y;
+            ctx.moveTo(hx, hy);
             hiirAll = true;
         });
         window.addEventListener("mouseup", function() {
@@ -28,6 +31,8 @@
                 hx = e.clientX - canvasPosition.x;
                 hy = e.clientY - canvasPosition.y;
                 console.log(hx,hy);
+                ctx.lineTo(hx,hy);
+                ctx.stroke();
                 ctx.fillRect(hx,hy,1,1);
             }
         });
