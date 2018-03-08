@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid #000;
+        }
+        #hk_logo {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <img id="hk_logo" src="https://www.tlu.ee/img/logo01.png" alt="">
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        // Ristkülik
+        //ctx.fillRect(10, 10, 200, 100);
+
+        ctx.beginPath();
+        ctx.fillStyle = "red";
+        ctx.lineWidth = 10;
+        ctx.rect(10, 10, 200, 100);
+        ctx.stroke();
+        ctx.fill();
+
+        // Jooned
+
+        ctx.beginPath();
+        ctx.lineWidth = 1;
+        ctx.fillStyle = "rgb(0, 255, 0)";
+        ctx.moveTo(250, 10);
+        ctx.lineTo(250, 110);
+        ctx.lineTo(350, 110);
+        ctx.closePath();
+        ctx.stroke();
+        ctx.fill();
+
+        // Kaar
+
+        // läbipaistev ring
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(0, 0, 255, 0.5)"; // alpha = 0.5 ehk 50% läbipaistmatu
+        ctx.arc(100, 100, 70, 0, 2*Math.PI);
+        ctx.fill();
+
+        // kombineeritud kujund (arc + lineTo)
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(0, 0, 255, 0.5)"; // alpha = 0.5 ehk 50% läbipaistmatu
+        ctx.arc(300, 150, 70, 0, 0.5*Math.PI, true);
+        ctx.lineTo(canvas.width, canvas.height);
+        ctx.stroke();
+
+        // Tekst
+        ctx.fillStyle = "#000000";
+        ctx.font = "30px Arial";
+        var txt = "Text canvasel";
+        var txtWidth = ctx.measureText(txt).width; // täpne laius
+        var widthInt = parseInt(txtWidth); // laius täisarvuna
+        ctx.fillText(txt + " - " + widthInt, 10, 300);
+        
+
+        // Pilt
+
+        // kui html on täielikult laetud, joonista pilt <img> elemendi kaudu
+        window.onload = function() {
+            var hk_logo_img_element = document.getElementById("hk_logo");
+            ctx.drawImage(hk_logo_img_element, 200, 300);
+        }
+
+        // kui pilt on laetud, siis joonista
+        var hk_logo = new Image();
+        hk_logo.src = "hk_logo.png";
+        hk_logo.onload = function() {
+            ctx.drawImage(hk_logo, 200, 200);
+        }
+        
+        
+    </script>
+</body>
+</html>
