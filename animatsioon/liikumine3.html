@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        var canvasLocation = canvas.getBoundingClientRect();
+
+        function Pall(x, y, r) {
+            this.x = x;
+            this.y = y;
+            this.r = r;
+            this.vx = 0;
+            this.vy = 0;
+        }
+        var pallid = [];
+
+        for (var i = 0; i < 10; i++) {
+            var r = parseInt(10 + Math.random() * 20);
+            var x = parseInt(r + Math.random() * (canvas.width - 2 * r));
+            var y = parseInt(r + Math.random() * (canvas.height - 2 * r));
+
+            pallid.push(new Pall(x, y, r));
+        }
+
+        //var pall1 = new Pall(20,50,30);
+
+        function arvuta() {
+            
+            for(var i = 0; i < pallid.length; i++) {
+
+                pallid[i].x += pallid[i].vx;
+                pallid[i].y += pallid[i].vy;
+
+                if(pallid[i].vx > 0) {
+                    pallid[i].vx += pallid[i].vx * 0.1;
+                }
+                if(pallid[i].vy > 0) {
+                    pallid[i].vy += pallid[i].vy * 0.1;
+                }
+            }
+        }
+
+        function joonista() {
+            arvuta();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (var i = 0; i < pallid.length; i++) {
+                ctx.beginPath();
+                ctx.arc(pallid[i].x, pallid[i].y, pallid[i].r, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(joonista);
+        }
+        requestAnimationFrame(joonista);
+
+        window.addEventListener("mousedown", function (e) {
+            var hx = e.clientX - canvasLocation.x;
+            var hy = e.clientY - canvasLocation.y;
+
+            for (var i = 0; i < pallid.length; i++) {
+                var kaugusx = pallid[i].x - hx;
+                var kaugusy = pallid[i].y - hy;
+                var kaugus = Math.sqrt(kaugusx * kaugusx + kaugusy * kaugusy) - pallid[i].r;
+
+                if (kaugus <= 0) {
+                    //pallid[i].r += 10;
+                    //pallid.splice(i, 1); // kustutab palli massiivist
+                    
+                    
+                    pallid[i].x += kaugusx;
+                    pallid[i].y += kaugusy;
+                    
+                    // pallid[i].vx = kaugusx / 10;
+                    // pallid[i].vy = kaugusy / 10;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
