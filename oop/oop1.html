@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script src="class/Stage.js"></script>
+    <script src="class/Shape.js"></script>
+    <script src="class/Circle.js"></script>
+    <script src="class/Rectangle.js"></script>
+    <script src="class/Polygon.js"></script>
+    <script>
+        var stage = new Stage(document.getElementById("canvas"));
+        var circle1 = new Circle(20,20,20, "#ff0000");
+        var rectangle1 = new Rectangle(100,100,200,100, "green");
+        var poly1 = new Polygon(100, 100, 6, 50, "blue");
+        stage.add(circle1);
+        stage.add(rectangle1);
+        stage.add(poly1);
+    </script>
+</body>
+</html>
